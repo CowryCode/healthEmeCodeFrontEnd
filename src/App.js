@@ -1,10 +1,31 @@
 import logo from './logo.svg';
 import './App.css';
+import Home from './components/Home';
+import Add from './components/Add';
+import Edit from './components/Edit';
+// import {BrowserRouter as Router, Route, Routes} from 'react-dom';
+import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
+      <Router>
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/create' element={<Add />} />
+          <Route path='/edit' element={<Edit />} />
+        </Routes>
+      </Router>
+    </div>
+  );
+}
+
+export default App;
+
+
+{/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
@@ -15,11 +36,6 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          Learn Reac
         </a>
-      </header>
-    </div>
-  );
-}
-
-export default App;
+      </header> */}
