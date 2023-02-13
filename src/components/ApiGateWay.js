@@ -1,6 +1,47 @@
 import axios from 'axios';
 import Contacts from './Contacts';
 
+export function createParticipants(email, opinoId){
+
+  const data = {
+      identifier : email,
+      dalOpinioID: opinoId
+    };
+
+    axios.post('http://localhost:8080/smile/create-user', JSON.stringify(data), {
+  headers: {
+      'Content-Type': 'application/json'
+  }
+})
+.then(response => {
+  console.log(response.data);
+})
+.catch(error => {
+  console.log(error);
+});
+}
+
+export function approveTribeMessage(imessageId){
+  let response =   axios.get('http://localhost:8080/smile/approved-message', {
+    headers: {
+        'Content-Type': 'application/json',
+        "Authorization": `Bearer `+imessageId
+    }
+  })
+  .then(response => {
+    // handle the response data
+    console.log(response.data);
+  })
+  .catch(error => {
+    // handle the error
+    console.log(error);
+  });
+
+//   let jsonArray = JSON.parse(response).data
+  let jsonArray = response.data;
+   return convertJsonToContacts(jsonArray);
+}
+
 export function saveContact(fn, ln, email, pn, url){
 
     const data = {
@@ -48,22 +89,6 @@ export function update(fn, ln, email, pn, url, id){
     console.log(error);
   });
 }
-
-export function deletContacts(id){
-    let response =   axios.delete('http://localhost:8080/healthEme/api/V1/remove-contact/'+id)
-    .then(response => {
-      // handle the response data
-      console.log(response.data);
-    })
-    .catch(error => {
-      // handle the error
-      console.log(error);
-    });
-  
-  //   let jsonArray = JSON.parse(response).data
-    let jsonArray = response.data;
-     return convertJsonToContacts(jsonArray);
-  }
 
 export function getContacts(){
   let response =   axios.get('http://localhost:8080/healthEme/api/V1/get-contacts')

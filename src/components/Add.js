@@ -86,7 +86,7 @@ function Add(){
             <form onSubmit={handleUpload}>
             <input type="file" onChange={handleChange} />
             <button type="submit">Upload</button>
-        </form>
+            </form>
         </div>
     )
 }
